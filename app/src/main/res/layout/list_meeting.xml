@@ -27,5 +27,11 @@
         android:layout_height="match_parent"
         android:id="@+id/toolbarListMeeting"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listMeeting_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

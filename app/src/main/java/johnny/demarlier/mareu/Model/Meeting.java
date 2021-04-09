@@ -14,6 +14,9 @@ public class Meeting implements Parcelable {
     private Room place;
     private String topic;
     private String mail;
+
+
+
     public boolean intersect(Meeting m){
         return place.equals(m.place);
     }
