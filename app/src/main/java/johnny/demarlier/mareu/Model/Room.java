@@ -6,33 +6,37 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 public class Room implements Parcelable {
-    private String mName;
+    private String mModelRoom;
+
+    public String getModelRoom() {
+        return mModelRoom;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return mName.equals(room.mName);
+        return mModelRoom.equals(room.mModelRoom);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mName);
+        return Objects.hash(mModelRoom);
     }
 
-    public Room(String name) {
-        mName = name;
+    public Room(String modelRoom) {
+        mModelRoom = modelRoom;
 
     }
 
     protected Room(Parcel in) {
-        mName = in.readString();
+        mModelRoom = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mName);
+        dest.writeString(mModelRoom);
     }
 
     @Override

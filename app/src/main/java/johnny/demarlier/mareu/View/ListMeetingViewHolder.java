@@ -38,11 +38,11 @@ public class ListMeetingViewHolder  extends RecyclerView.ViewHolder {
     public void bind(Meeting meeting, MeetingListAdapter.Listener callback){
         roundImage.setImageResource(R.drawable.ic_baseline_play_circle_outline_24);
         deleteBtn.setOnClickListener(view -> callback.onClickDelete(meeting));
-        //placeName.setText(meeting.getPlace());
+        placeName.setText(meeting.getPlace().getModelRoom());
         topicName.setText(meeting.getTopic());
         emailName.setText(meeting.getMail());
         dateName.setText(meeting.getDate());
-        startMeetingName.setText(meeting.getStartMeeting());
-        stopMeetingName.setText(meeting.getStopMeeting());
+        startMeetingName.setText(meeting.getStartMeeting().getModelHours());
+        stopMeetingName.setText(meeting.getStopMeeting().getModelHours());
     }
 }

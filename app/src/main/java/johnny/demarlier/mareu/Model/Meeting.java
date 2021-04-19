@@ -9,8 +9,8 @@ import android.os.Parcelable;
 
 public class Meeting implements Parcelable {
 
-    private String startMeeting;
-    private String stopMeeting;
+    private Hours startMeeting;
+    private Hours stopMeeting;
     private String date;
     private Room place;
     private String topic;
@@ -33,7 +33,7 @@ public class Meeting implements Parcelable {
      * @param topic
      * @param mail
      */
-    public Meeting(String startMeeting, String stopMeeting, String date, Room place, String topic, String mail) {
+    public Meeting(Hours startMeeting, Hours stopMeeting, String date, Room place, String topic, String mail) {
         this.startMeeting = startMeeting;
         this.stopMeeting = stopMeeting;
         this.date = date;
@@ -45,8 +45,8 @@ public class Meeting implements Parcelable {
 
 
     protected Meeting(Parcel in) {
-        startMeeting = in.readString();
-        stopMeeting = in.readString();
+        startMeeting = in.readParcelable(Hours.class.getClassLoader());
+        stopMeeting = in.readParcelable(Hours.class.getClassLoader());
         date = in.readString();
         place = in.readParcelable(Room.class.getClassLoader());
         topic = in.readString();
@@ -66,17 +66,17 @@ public class Meeting implements Parcelable {
     };
 
     //----GETTERS & SETTERS---
-    public String getStartMeeting() {
+    public Hours getStartMeeting() {
         return startMeeting;
     }
 
-    public void setStartMeeting(String startMeeting) {
+    public void setStartMeeting(Hours startMeeting) {
         this.startMeeting = startMeeting;
     }
 
-    public String getStopMeeting(){ return stopMeeting; }
+    public Hours getStopMeeting(){ return stopMeeting; }
 
-    public void setStopMeeting(String stopMeeting) { this.stopMeeting = stopMeeting; }
+    public void setStopMeeting(Hours stopMeeting) { this.stopMeeting = stopMeeting; }
 
     public String getDate() {
         return date;
@@ -135,8 +135,8 @@ public class Meeting implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(startMeeting);
-        parcel.writeString(stopMeeting);
+        parcel.writeParcelable(startMeeting, i);
+        parcel.writeParcelable(stopMeeting, i);
         parcel.writeString(date);
         parcel.writeParcelable(place, i);
         parcel.writeString(topic);

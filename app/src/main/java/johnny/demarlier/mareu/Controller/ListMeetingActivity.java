@@ -88,7 +88,7 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
     }
 
 
-    // @Override
+    @Override
     public void onClickDelete(Meeting meeting) {
         mMeetingApiService.deleteMeeting(meeting);
         loadData();

@@ -37,28 +37,39 @@
         android:id="@+id/textViewPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:maxLines="1"
         android:text="Place"
         app:layout_constraintStart_toEndOf="@+id/item_round_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_width="281dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:maxLines="1"
+        android:maxLength="40"
+        android:ellipsize="end"
         android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/item_round_image"
         app:layout_constraintTop_toBottomOf="@+id/textViewPlace"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintVertical_bias="0.941" />
 
     <TextView
         android:id="@+id/textViewTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:maxLines="1"
         android:text="Topic"
         app:layout_constraintBottom_toBottomOf="@+id/textViewPlace"
         app:layout_constraintStart_toEndOf="@+id/textViewPlace"
@@ -69,20 +80,23 @@
         android:id="@+id/textViewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
         android:text="Date"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
+        app:layout_constraintEnd_toStartOf="@+id/textViewStartMeeting"
         app:layout_constraintStart_toEndOf="@+id/textViewTopic"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.387" />
 
     <TextView
         android:id="@+id/textViewStartMeeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Start Meeting"
-        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
-        app:layout_constraintHorizontal_bias="0.774"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:text="Start"
+        app:layout_constraintEnd_toStartOf="@+id/textViewStopMeeting"
         app:layout_constraintStart_toEndOf="@+id/textViewDate"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,13 +104,12 @@
         android:id="@+id/textViewStopMeeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Stop Meeting"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="Stop"
         app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toEndOf="@+id/textViewEmail"
-        app:layout_constraintTop_toBottomOf="@+id/textViewStartMeeting"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintStart_toEndOf="@+id/textViewStartMeeting"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

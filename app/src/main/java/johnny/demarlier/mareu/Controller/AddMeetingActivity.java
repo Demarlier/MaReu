@@ -21,13 +21,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import johnny.demarlier.mareu.Fragment.DatePickerFragment;
 import johnny.demarlier.mareu.Fragment.TimePickerFragment;
+import johnny.demarlier.mareu.Model.Hours;
 import johnny.demarlier.mareu.Model.Meeting;
 import johnny.demarlier.mareu.Model.Room;
 import johnny.demarlier.mareu.R;
 import johnny.demarlier.mareu.Service.DI;
 import johnny.demarlier.mareu.Service.MeetingApiService;
 
-public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     @BindView(R.id.submitBtn)
     public Button submitMeeting;
@@ -50,11 +51,11 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @BindView(R.id.mailMeeting)
     public EditText mMailMeeting;
 
+
     private MeetingApiService mMeetingApiService;
     private String currentDateString;
-    private String startTimeString;
-    private String stopTimeString;
-
+    private Hours startTimeString;
+    private Hours stopTimeString;
 
 
     @Override
@@ -74,7 +75,13 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         mStartMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFragment();
+                DialogFragment timePicker = new TimePickerFragment(new TimePickerDialog.OnTimeSetListener(){
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        startTimeString = hourOfDay + ":" + minute;
+                    }
+                });
                 timePicker.show(getSupportFragmentManager(), "start time picker");
 
             }
@@ -82,7 +89,12 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         mStopMeeting.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DialogFragment timePicker = new TimePickerFragment();
+                DialogFragment timePicker = new TimePickerFragment(new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        stopTimeString = hourOfDay + ":" + minute;
+                    }
+                });
                 timePicker.show(getSupportFragmentManager(),"stop time picker");
             }
         });
@@ -99,17 +111,11 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        startTimeString = hourOfDay + ":" + minute;
-        stopTimeString = hourOfDay + ":" + minute;
-
-    }
 
     @OnClick(R.id.submitBtn)
     void addMeeting() {
-        String startMeeting = startTimeString;
-        String stopMeeting = stopTimeString;
+        Hours startMeeting = new Hours(startTimeString.toString());
+        Hours stopMeeting = new Hours(stopTimeString.toString());
         String date = currentDateString;
         Room place = new Room(mPlaceMeeting.getEditableText().toString());
         String topic = mTopicMeeting.getEditableText().toString();
