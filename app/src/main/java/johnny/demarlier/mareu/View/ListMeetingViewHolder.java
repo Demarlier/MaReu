@@ -45,4 +45,5 @@ public class ListMeetingViewHolder  extends RecyclerView.ViewHolder {
         startMeetingName.setText(meeting.getStartMeeting().getModelHours());
         stopMeetingName.setText(meeting.getStopMeeting().getModelHours());
     }
+
 }
