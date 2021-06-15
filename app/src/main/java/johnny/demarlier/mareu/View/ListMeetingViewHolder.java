@@ -16,10 +16,10 @@ public class ListMeetingViewHolder  extends RecyclerView.ViewHolder {
     private TextView placeName;
     private TextView topicName;
     private TextView emailName;
-    private TextView dateName;
     private TextView startMeetingName;
-    private TextView stopMeetingName;
     private ImageButton deleteBtn;
+    private TextView separation1;
+    private TextView separation2;
 
 
 
@@ -29,10 +29,10 @@ public class ListMeetingViewHolder  extends RecyclerView.ViewHolder {
         placeName = itemView.findViewById(R.id.textViewPlace);
         topicName = itemView.findViewById(R.id.textViewTopic);
         emailName = itemView.findViewById(R.id.textViewEmail);
-        dateName = itemView.findViewById(R.id.textViewDate);
         startMeetingName = itemView.findViewById(R.id.textViewStartMeeting);
-        stopMeetingName = itemView.findViewById(R.id.textViewStopMeeting);
         deleteBtn = itemView.findViewById(R.id.item_list_delete_button);
+        separation1 = itemView.findViewById(R.id.textViewSeparation);
+        separation2 = itemView.findViewById(R.id.textViewSeparationTwo);
 
     }
     public void bind(Meeting meeting, MeetingListAdapter.Listener callback){
@@ -41,9 +41,7 @@ public class ListMeetingViewHolder  extends RecyclerView.ViewHolder {
         placeName.setText(meeting.getPlace().getModelRoom());
         topicName.setText(meeting.getTopic());
         emailName.setText(meeting.getMail());
-        dateName.setText(meeting.getDate());
-        startMeetingName.setText(meeting.getStartMeeting().getModelHours());
-        stopMeetingName.setText(meeting.getStopMeeting().getModelHours());
+        startMeetingName.setText(meeting.getStartMeeting().toString());
     }
 
 }

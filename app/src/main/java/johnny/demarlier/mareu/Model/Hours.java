@@ -1,43 +1,23 @@
 package johnny.demarlier.mareu.Model;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Objects;
-
 public class Hours implements Parcelable {
-    private String mModelHours;
+    private int hours;
+    private int minutes;
 
-    public String getModelHours(){return mModelHours;}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Hours hours = (Hours) o;
-        return mModelHours.equals(hours.mModelHours);
+    public Hours(int hours, int minutes) {
+        this.hours = hours;
+        this.minutes = minutes;
+
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(mModelHours);
-    }
-
-    public Hours(String modelHours){
-        mModelHours = modelHours;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mModelHours);
-    }
     protected Hours(Parcel in) {
-        mModelHours = in.readString();
+        hours = in.readInt();
+        minutes = in.readInt();
     }
 
     public static final Creator<Hours> CREATOR = new Creator<Hours>() {
@@ -51,4 +31,40 @@ public class Hours implements Parcelable {
             return new Hours[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return hours + ":" + minutes;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(hours);
+        dest.writeInt(minutes);
+    }
+
+    public boolean isGreater(Hours h) {
+        boolean result = this.hours > h.hours || (this.hours == h.hours && (this.minutes >= h.minutes));
+        return result;
+    }
+
+    public boolean isLower(Hours h) {
+        boolean results = this.hours < h.hours || (this.hours == h.hours && (this.minutes <= h.minutes));
+        return results;
+
+    }
+
+    public boolean isBetween(Hours start, Hours end) {
+        return isGreater(start) && isLower(end);
+    }
+
+    public boolean isConflictWithMeetingHours(Meeting meeting) {
+        return isBetween(meeting.getStartMeeting(), meeting.getStopMeeting());
+    }
+
 }

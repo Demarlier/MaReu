@@ -4,7 +4,11 @@ package johnny.demarlier.mareu.Controller;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 
 import androidx.annotation.Nullable;
@@ -35,7 +39,7 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
     public RecyclerView mRecyclerView;
 
     private MeetingApiService mMeetingApiService;
-    private List<Meeting> mMeetings;
+    private MeetingListAdapter listAdapter;
 
 
     @Override
@@ -57,15 +61,14 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
     }
 
     private void loadData() {
-        MeetingListAdapter adapter = (MeetingListAdapter) mRecyclerView.getAdapter();
-        adapter.updateList(mMeetingApiService.getMeeting());
+        listAdapter = (MeetingListAdapter) mRecyclerView.getAdapter();
+        listAdapter.updateList(mMeetingApiService.getMeetings());
     }
 
     /**
      * Init the List of meetings
      */
     private void initList() {
-        mMeetings = mMeetingApiService.getMeeting();
         mRecyclerView.setAdapter(new MeetingListAdapter(this));
     }
 
@@ -93,5 +96,31 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
         mMeetingApiService.deleteMeeting(meeting);
         loadData();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.reu_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listAdapter.setMeetingsFull(mMeetingApiService.getMeetings());
+                listAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
+        return true;
     }
 }

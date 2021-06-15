@@ -12,7 +12,7 @@
         android:id="@+id/item_round_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,12 +23,15 @@
 
     <ImageButton
         android:id="@+id/item_list_delete_button"
-        android:layout_width="wrap_content"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewPlace"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.489"
         app:srcCompat='@drawable/ic_baseline_delete_24' />
@@ -37,79 +40,74 @@
         android:id="@+id/textViewPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:maxLength="10"
         android:maxLines="1"
         android:text="Place"
-        app:layout_constraintStart_toEndOf="@+id/item_round_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeparationTwo" />
 
     <TextView
         android:id="@+id/textViewEmail"
-        android:layout_width="281dp"
+        android:layout_width="250dp"
         android:layout_height="19dp"
-        android:layout_marginStart="16dp"
-        android:maxLines="1"
-        android:maxLength="40"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
+        android:maxLength="40"
+        android:maxLines="1"
         android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/item_round_image"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPlace"
-        app:layout_constraintVertical_bias="0.941" />
+        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
+        app:layout_constraintStart_toEndOf="@+id/item_round_image" />
 
     <TextView
         android:id="@+id/textViewTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:maxLength="10"
         android:maxLines="1"
         android:text="Topic"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewPlace"
-        app:layout_constraintStart_toEndOf="@+id/textViewPlace"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="Date"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
-        app:layout_constraintEnd_toStartOf="@+id/textViewStartMeeting"
-        app:layout_constraintStart_toEndOf="@+id/textViewTopic"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.387" />
+        app:layout_constraintStart_toEndOf="@+id/item_round_image" />
 
     <TextView
         android:id="@+id/textViewStartMeeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Start"
-        app:layout_constraintEnd_toStartOf="@+id/textViewStopMeeting"
-        app:layout_constraintStart_toEndOf="@+id/textViewDate"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeparation" />
 
     <TextView
-        android:id="@+id/textViewStopMeeting"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewSeparation"
+        android:layout_width="4dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:text="Stop"
-        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
-        app:layout_constraintStart_toEndOf="@+id/textViewStartMeeting"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="-"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
+        app:layout_constraintStart_toEndOf="@+id/textViewTopic" />
+
+    <TextView
+        android:id="@+id/textViewSeparationTwo"
+        android:layout_width="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="-"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
+        app:layout_constraintStart_toEndOf="@+id/textViewStartMeeting" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

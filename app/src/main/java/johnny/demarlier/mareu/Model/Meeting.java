@@ -1,7 +1,16 @@
 package johnny.demarlier.mareu.Model;
+
+import java.util.List;
 import java.util.Objects;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import johnny.demarlier.mareu.Controller.AddMeetingActivity;
+import johnny.demarlier.mareu.Controller.ListMeetingActivity;
 
 /**
  * Model object representing a meeting
@@ -17,11 +26,23 @@ public class Meeting implements Parcelable {
     private String mail;
 
 
+    private boolean isConflict(Meeting other) {
+        if (this.place.equals(other.place) && this.date.equals(other.date)) {
+            if (this.startMeeting.isConflictWithMeetingHours(other) || this.stopMeeting.isConflictWithMeetingHours(other)) {
+                return true;
+            }
+        }
 
-    public boolean intersect(Meeting m){
-        return place.equals(m.place);
+        return false;
     }
 
+    public boolean isConflict(List<Meeting> others) {
+        for (Meeting other : others) {
+            if (this.isConflict(other))
+                return true;
+        }
+        return false;
+    }
 
     /**
      * Constructor
@@ -74,9 +95,13 @@ public class Meeting implements Parcelable {
         this.startMeeting = startMeeting;
     }
 
-    public Hours getStopMeeting(){ return stopMeeting; }
+    public Hours getStopMeeting() {
+        return stopMeeting;
+    }
 
-    public void setStopMeeting(Hours stopMeeting) { this.stopMeeting = stopMeeting; }
+    public void setStopMeeting(Hours stopMeeting) {
+        this.stopMeeting = stopMeeting;
+    }
 
     public String getDate() {
         return date;
@@ -142,4 +167,5 @@ public class Meeting implements Parcelable {
         parcel.writeString(topic);
         parcel.writeString(mail);
     }
+
 }

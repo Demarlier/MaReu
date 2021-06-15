@@ -55,4 +55,5 @@ public class Room implements Parcelable {
             return new Room[size];
         }
     };
+
 }

@@ -10,7 +10,7 @@ public class MeetingDiffCallback extends DiffUtil.Callback {
     private final List<Meeting> oldMeetings;
     private final List<Meeting> newMeetings;
 
-    public MeetingDiffCallback(List<Meeting> newMeetings, List<Meeting> oldMeetings){
+    public MeetingDiffCallback(List<Meeting> newMeetings, List<Meeting> oldMeetings) {
         this.newMeetings = newMeetings;
         this.oldMeetings = oldMeetings;
     }
@@ -28,7 +28,8 @@ public class MeetingDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldMeetings.get(oldItemPosition).getTopic() == newMeetings.get(newItemPosition).getTopic();    }
+        return oldMeetings.get(oldItemPosition).getTopic() == newMeetings.get(newItemPosition).getTopic();
+    }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {

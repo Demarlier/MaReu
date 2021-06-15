@@ -11,19 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaReu">
-    <activity
-        android:name=".Controller.AddMeetingActivity"
-        android:label="@string/app_name"
-        tools:ignore="MissingClass,WrongManifestParent"/>
-    <activity android:name=".Controller.ListMeetingActivity"
-        android:label="@string/app_name">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+        <activity
+            android:name=".Controller.DetailMeetingActivity"
+            android:parentActivityName=".Controller.ListMeetingActivity"
+            android:label="MaReu" />
 
-        </intent-filter>
+        <activity
+            android:name=".Controller.AddMeetingActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".Controller.ListMeetingActivity"
+            tools:ignore="MissingClass,WrongManifestParent" />
 
-    </activity></application>
+        <activity
+            android:name=".Controller.ListMeetingActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+    </application>
 
 
 </manifest>

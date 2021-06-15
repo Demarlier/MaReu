@@ -14,7 +14,7 @@ import johnny.demarlier.mareu.Service.DI;
 import johnny.demarlier.mareu.Service.MeetingApiService;
 
 public class DetailMeetingActivity extends AppCompatActivity {
-
+    public final static String MEETING_EXTRA_KEY = "Meeting";
     private MeetingApiService mMeetingApiService;
     private Meeting mMeeting;
 
@@ -41,6 +41,7 @@ public class DetailMeetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_meeting);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mMeetingApiService = DI.getMeetingApiService();
         getMeeting();
@@ -48,11 +49,12 @@ public class DetailMeetingActivity extends AppCompatActivity {
     }
 
     private void getMeeting() {
-        mMeeting = getIntent().getParcelableExtra("meeting");
+
+        mMeeting = getIntent().getParcelableExtra(MEETING_EXTRA_KEY);
     }
 
     private void seeDetailMeeting() {
-        mDetailPlace.setText(mMeeting.getPlace().toString());
+        mDetailPlace.setText(mMeeting.getPlace().getModelRoom());
         mDetailTopic.setText(mMeeting.getTopic());
         mDetailDate.setText(mMeeting.getDate());
         mDetailStartMeeting.setText(mMeeting.getStartMeeting().toString());

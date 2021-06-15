@@ -12,7 +12,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      * {@inheritDoc}
      */
     @Override
-    public List<Meeting> getMeeting() {
+    public List<Meeting> getMeetings() {
         return meetings;
     }
 
@@ -30,7 +30,12 @@ public class DummyMeetingApiService implements MeetingApiService {
      * @param meeting
      */
     @Override
-    public void createMeeting(Meeting meeting) {
-        meetings.add(meeting);
+    public boolean createMeeting(Meeting meeting) {
+        if (!meeting.isConflict(meetings)) {
+
+            meetings.add(meeting);
+            return true;
+        }
+        return false;
     }
 }
