@@ -2,16 +2,20 @@ package johnny.demarlier.mareu.Controller;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.colorpicker.FloatingButton;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -31,7 +35,7 @@ import johnny.demarlier.mareu.Service.MeetingApiService;
 public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     @BindView(R.id.submitBtn)
-    public Button submitMeeting;
+    public Button mSubmitMeeting;
 
     @BindView(R.id.dateMeeting)
     public Button mAddBtnDateMeeting;
@@ -51,11 +55,15 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @BindView(R.id.mailMeeting)
     public EditText mMailMeeting;
 
+    @BindView(R.id.fabColorPicker)
+    public FloatingButton mFabColorPicker;
+
 
     private MeetingApiService mMeetingApiService;
-    private String currentDateString;
-    private Hours startTimeString;
-    private Hours stopTimeString;
+    private String mCurrentDateString;
+    private Hours mStartTimeMeeting;
+    private Hours mStopTimeMeeting;
+    private int color = -16777216;
 
 
     @Override
@@ -64,39 +72,26 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         setContentView(R.layout.add_meeting);
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
+        mFabColorPicker.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple_500)));
 
-        mAddBtnDateMeeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
-            }
+        mAddBtnDateMeeting.setOnClickListener(v -> {
+            DialogFragment datePicker = new DatePickerFragment();
+            datePicker.show(getSupportFragmentManager(), "date picker");
         });
-        mStartMeeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFragment(new TimePickerDialog.OnTimeSetListener(){
+        mStartMeeting.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickerFragment((view, hourOfDay, minute) -> {
+                mStartTimeMeeting = new Hours(hourOfDay, minute);
+                mStartMeeting.setText(hourOfDay + ":" + minute);
+            });
+            timePicker.show(getSupportFragmentManager(), "start time picker");
 
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        startTimeString = hourOfDay + ":" + minute;
-                    }
-                });
-                timePicker.show(getSupportFragmentManager(), "start time picker");
-
-            }
         });
-        mStopMeeting.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                DialogFragment timePicker = new TimePickerFragment(new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        stopTimeString = hourOfDay + ":" + minute;
-                    }
-                });
-                timePicker.show(getSupportFragmentManager(),"stop time picker");
-            }
+        mStopMeeting.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickerFragment((view, hourOfDay, minute) -> {
+                mStopTimeMeeting = new Hours(hourOfDay, minute);
+                mStopMeeting.setText(hourOfDay + ":" + minute);
+            });
+            timePicker.show(getSupportFragmentManager(), "stop time picker");
         });
     }
 
@@ -106,24 +101,31 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        currentDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
-
-
+        mCurrentDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
+        mAddBtnDateMeeting.setText(mCurrentDateString);
     }
 
 
     @OnClick(R.id.submitBtn)
     void addMeeting() {
-        Hours startMeeting = new Hours(startTimeString.toString());
-        Hours stopMeeting = new Hours(stopTimeString.toString());
-        String date = currentDateString;
+
+        String date = mCurrentDateString;
+        color = mFabColorPicker.getBackgroundTintList().getDefaultColor();
         Room place = new Room(mPlaceMeeting.getEditableText().toString());
         String topic = mTopicMeeting.getEditableText().toString();
         String mail = mMailMeeting.getEditableText().toString();
-        Meeting meeting = new Meeting(startMeeting, stopMeeting, date, place, topic, mail);
-        mMeetingApiService.createMeeting(meeting);
-        finish();
-
+        if (mStartTimeMeeting == null || mStopTimeMeeting == null || date == null || place.getModelRoom().equals("") || topic.equals("")) {
+            Toast.makeText(AddMeetingActivity.this, "Please write a place and the hours of a meeting before submit", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Meeting meeting = new Meeting(mStartTimeMeeting, mStopTimeMeeting, date, place, topic, mail);
+        meeting.setMeetingColor(color);
+        if (!mMeetingApiService.createMeeting(meeting)) {
+            Toast.makeText(AddMeetingActivity.this, "This Hours and Place are already used", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(AddMeetingActivity.this, "Your meeting has been set", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
     }
 }

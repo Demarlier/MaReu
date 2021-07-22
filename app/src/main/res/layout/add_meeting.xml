@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
 
     <Button
         android:id="@+id/dateMeeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Date of Meeting"
+        android:text="@string/date_of_meeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Start meeting"
+        android:text="@string/start_meeting"
         app:layout_constraintEnd_toStartOf="@+id/stopMeeting"
         app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:text="Stop Meeting"
+        android:text="@string/stop_meeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateMeeting" />
 
@@ -43,12 +50,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints="@string/place"
+        android:hint="@string/place"
         android:maxLength="30"
-        android:hint="Place"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startMeeting" />
+        app:layout_constraintTop_toBottomOf="@+id/startMeeting"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/topicMeeting"
@@ -57,12 +66,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints="@string/topic"
+        android:hint="@string/topic"
         android:maxLength="30"
-        android:hint="Topic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeMeeting" />
+        app:layout_constraintTop_toBottomOf="@+id/placeMeeting"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/mailMeeting"
@@ -71,7 +82,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:hint="Mail"
+        android:autofillHints="@string/mail"
+        android:hint="@string/mail"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -80,13 +93,41 @@
 
     <Button
         android:id="@+id/submitBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fabColorPicker"
+        app:layout_constraintVertical_bias="0.018" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/d_finissez_la_couleur_de_votre_r_union"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mailMeeting" />
 
-
+    <com.example.colorpicker.FloatingButton
+        android:id="@+id/fabColorPicker"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:contentDescription="@string/couleur"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

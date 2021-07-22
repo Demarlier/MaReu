@@ -1,14 +1,14 @@
-package johnny.demarlier.mareu;
+package johnny.demarlier.mareu.Controller;
 
-import android.content.Context;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -17,33 +17,31 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import johnny.demarlier.mareu.Controller.ListMeetingActivity;
+import johnny.demarlier.mareu.R;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+@LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MaReuInstrumentedTest {
+public class MaReuTestInstrumentedAdd {
 
     @Rule
     public ActivityTestRule<ListMeetingActivity> mActivityTestRule = new ActivityTestRule<>(ListMeetingActivity.class);
+
     @Test
-    public void AddMeetingWithNoInterference() {
+    public void maRéuTestInstrumentedAdd() {
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.addMeeting_btn),
                         childAtPosition(
@@ -58,11 +56,10 @@ public class MaReuInstrumentedTest {
                 allOf(withId(R.id.dateMeeting), withText("Date of Meeting"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                0),
-                        isDisplayed()));
-        materialButton.perform(click());
+                                0)));
+        materialButton.perform(scrollTo(), click());
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
@@ -77,11 +74,10 @@ public class MaReuInstrumentedTest {
                 allOf(withId(R.id.startMeeting), withText("Start meeting"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                1),
-                        isDisplayed()));
-        materialButton3.perform(click());
+                                1)));
+        materialButton3.perform(scrollTo(), click());
 
         ViewInteraction materialRadioButton = onView(
                 allOf(withClassName(is("com.google.android.material.radiobutton.MaterialRadioButton")), withText("PM"),
@@ -107,11 +103,10 @@ public class MaReuInstrumentedTest {
                 allOf(withId(R.id.stopMeeting), withText("Stop Meeting"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                2),
-                        isDisplayed()));
-        materialButton5.perform(click());
+                                2)));
+        materialButton5.perform(scrollTo(), click());
 
         ViewInteraction materialRadioButton2 = onView(
                 allOf(withClassName(is("com.google.android.material.radiobutton.MaterialRadioButton")), withText("PM"),
@@ -137,41 +132,44 @@ public class MaReuInstrumentedTest {
                 allOf(withId(R.id.placeMeeting),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("Yoshi"), closeSoftKeyboard());
+                                3)));
+        appCompatEditText.perform(scrollTo(), replaceText("Bowser"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.topicMeeting),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                4),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("Java"), closeSoftKeyboard());
+                                4)));
+        appCompatEditText2.perform(scrollTo(), replaceText("Réunion D"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.mailMeeting),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                5),
-                        isDisplayed()));
-        appCompatEditText3.perform(replaceText("bonjour@gmail.com"), closeSoftKeyboard());
+                                5)));
+        appCompatEditText3.perform(scrollTo(), replaceText("jean@gmail.com"), closeSoftKeyboard());
 
         ViewInteraction materialButton7 = onView(
                 allOf(withId(R.id.submitBtn), withText("Submit"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        withClassName(is("android.widget.ScrollView")),
                                         0),
-                                6),
+                                6)));
+        materialButton7.perform(scrollTo(), click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.textViewTopic), withText("Réunion D"),
+                        withParent(allOf(withId(R.id.fragmentMeeting),
+                                withParent(withId(R.id.listMeeting_RecyclerView)))),
                         isDisplayed()));
-        materialButton7.perform(click());
+        textView.check(matches(withText("Réunion D")));
     }
 
     private static Matcher<View> childAtPosition(

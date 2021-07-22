@@ -1,6 +1,7 @@
 package johnny.demarlier.mareu.Controller;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;

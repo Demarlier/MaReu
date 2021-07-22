@@ -22,14 +22,14 @@ public class MaReuUnitTest {
     @Before
     public void initialize(){
         api.getMeetings().clear();
-        api.createMeeting(new Meeting(new Hours(14,00),new Hours (15,00),"28/6/21",new Room("Peach"),"Réunion A", "maxime@lamazone.com, alex@lamzone"));
+        api.createMeeting(new Meeting(new Hours(14, 0),new Hours (15, 0),"28/6/21",new Room("Peach"),"Réunion A", "maxime@lamazone.com, alex@lamzone"));
 
     }
     // Add a meeting with the same hours and place should not works ---
     @Test
     public void addMeetingsWithSameHoursAndRooms_ShouldNotWorks() {
         assertEquals(api.getMeetings().size(),1);
-        api.createMeeting(new Meeting(new Hours(14,00),new Hours (15,00),"28/6/21",new Room("Peach"),"Réunion B", "maxime@lamazone.com, alex@lamzone"));
+        api.createMeeting(new Meeting(new Hours(14, 0),new Hours (15,0),"28/6/21",new Room("Peach"),"Réunion B", "maxime@lamazone.com, alex@lamzone"));
         assertEquals(api.getMeetings().size(),1);
     }
 
@@ -37,7 +37,7 @@ public class MaReuUnitTest {
     @Test
     public void addMeetingsBeforeAnActualOneWithSameRooms_ShouldNotWorks(){
         assertEquals(api.getMeetings().size(),1);
-        api.createMeeting(new Meeting(new Hours(13,30),new Hours (15,00),"28/6/21",new Room("Peach"),"Réunion B", "maxime@lamazone.com, alex@lamzone"));
+        api.createMeeting(new Meeting(new Hours(13,30),new Hours (15,0),"28/6/21",new Room("Peach"),"Réunion B", "maxime@lamazone.com, alex@lamzone"));
         assertEquals(api.getMeetings().size(),1);
     }
 
@@ -45,7 +45,7 @@ public class MaReuUnitTest {
     @Test
     public void addMeetingWhileAnActualOneWithSameRooms_ShouldNotWorks(){
         assertEquals(api.getMeetings().size(),1);
-        api.createMeeting(new Meeting(new Hours(14,30),new Hours (15,00),"28/6/21",new Room("Peach"),"Réunion B", "maxime@lamazone.com, alex@lamzone"));
+        api.createMeeting(new Meeting(new Hours(14,30),new Hours (15,0),"28/6/21",new Room("Peach"),"Réunion B", "maxime@lamazone.com, alex@lamzone"));
         assertEquals(api.getMeetings().size(),1);
     }
 
@@ -69,7 +69,7 @@ public class MaReuUnitTest {
     @Test
     public void addMeetingWithSamePlaceAndRoomsButDifferentDate_ShouldWorks(){
         assertEquals(api.getMeetings().size(),1);
-        api.createMeeting(new Meeting(new Hours(14,00),new Hours (15,00),"29/6/21",new Room("Peach"),"Réunion G", "maxime@lamazone.com, alex@lamzone"));
+        api.createMeeting(new Meeting(new Hours(14,0),new Hours (15,0),"29/6/21",new Room("Peach"),"Réunion G", "maxime@lamazone.com, alex@lamzone"));
         assertEquals(api.getMeetings().size(),2);
 
     }

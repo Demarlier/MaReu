@@ -8,17 +8,18 @@
     android:orientation="vertical"
     tools:layout_editor_absoluteY="81dp">
 
-    <ImageView
+    <View
         android:id="@+id/item_round_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/circle_layout"
+        android:backgroundTint="#000DFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageButton
@@ -34,7 +35,8 @@
         app:layout_constraintStart_toEndOf="@+id/textViewPlace"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.489"
-        app:srcCompat='@drawable/ic_baseline_delete_24' />
+        app:srcCompat='@drawable/ic_baseline_delete_24'
+        android:contentDescription="@string/delete" />
 
     <TextView
         android:id="@+id/textViewPlace"
@@ -45,7 +47,7 @@
         android:ellipsize="end"
         android:maxLength="10"
         android:maxLines="1"
-        android:text="Place"
+        android:text="@string/place"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
         app:layout_constraintStart_toEndOf="@+id/textViewSeparationTwo" />
@@ -60,7 +62,7 @@
         android:ellipsize="end"
         android:maxLength="40"
         android:maxLines="1"
-        android:text="Email"
+        android:text="@string/email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
         app:layout_constraintStart_toEndOf="@+id/item_round_image" />
@@ -74,7 +76,7 @@
         android:ellipsize="end"
         android:maxLength="10"
         android:maxLines="1"
-        android:text="Topic"
+        android:text="@string/topic"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
         app:layout_constraintStart_toEndOf="@+id/item_round_image" />
@@ -85,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="Start"
+        android:text="@string/start"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewEmail"
         app:layout_constraintStart_toEndOf="@+id/textViewSeparation" />

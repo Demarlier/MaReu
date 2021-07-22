@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import johnny.demarlier.mareu.Controller.DetailMeetingActivity;
-import johnny.demarlier.mareu.MeetingDiffCallback;
 import johnny.demarlier.mareu.Model.Meeting;
 import johnny.demarlier.mareu.R;
 
@@ -55,16 +54,10 @@ public class MeetingListAdapter extends RecyclerView.Adapter<ListMeetingViewHold
         holder.bind(mMeetings.get(position), callback);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                Intent detailActivity = new Intent(holder.itemView.getContext(), DetailMeetingActivity.class);
-                detailActivity.putExtra(DetailMeetingActivity.MEETING_EXTRA_KEY, mMeetings.get(position));
-                v.getContext().startActivity(detailActivity);
-            }
-
+        holder.itemView.setOnClickListener(v -> {
+            Intent detailActivity = new Intent(holder.itemView.getContext(), DetailMeetingActivity.class);
+            detailActivity.putExtra(DetailMeetingActivity.MEETING_EXTRA_KEY, mMeetings.get(position));
+            v.getContext().startActivity(detailActivity);
         });
     }
 

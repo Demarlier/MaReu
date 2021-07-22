@@ -17,8 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -39,7 +37,7 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
     public RecyclerView mRecyclerView;
 
     private MeetingApiService mMeetingApiService;
-    private MeetingListAdapter listAdapter;
+    private MeetingListAdapter mListAdapter;
 
 
     @Override
@@ -61,8 +59,8 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
     }
 
     private void loadData() {
-        listAdapter = (MeetingListAdapter) mRecyclerView.getAdapter();
-        listAdapter.updateList(mMeetingApiService.getMeetings());
+        mListAdapter = (MeetingListAdapter) mRecyclerView.getAdapter();
+        mListAdapter.updateList(mMeetingApiService.getMeetings());
     }
 
     /**
@@ -114,8 +112,8 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                listAdapter.setMeetingsFull(mMeetingApiService.getMeetings());
-                listAdapter.getFilter().filter(newText);
+                mListAdapter.setMeetingsFull(mMeetingApiService.getMeetings());
+                mListAdapter.getFilter().filter(newText);
                 return false;
             }
         });

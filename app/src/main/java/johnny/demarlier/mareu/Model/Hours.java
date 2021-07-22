@@ -5,19 +5,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Hours implements Parcelable {
-    private int hours;
-    private int minutes;
+    private int mHours;
+    private int mMinutes;
 
 
     public Hours(int hours, int minutes) {
-        this.hours = hours;
-        this.minutes = minutes;
+        this.mHours = hours;
+        this.mMinutes = minutes;
 
     }
 
     protected Hours(Parcel in) {
-        hours = in.readInt();
-        minutes = in.readInt();
+        mHours = in.readInt();
+        mMinutes = in.readInt();
     }
 
     public static final Creator<Hours> CREATOR = new Creator<Hours>() {
@@ -34,7 +34,7 @@ public class Hours implements Parcelable {
 
     @Override
     public String toString() {
-        return hours + ":" + minutes;
+        return mHours + ":" + mMinutes;
     }
 
     @Override
@@ -44,17 +44,17 @@ public class Hours implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(hours);
-        dest.writeInt(minutes);
+        dest.writeInt(mHours);
+        dest.writeInt(mMinutes);
     }
 
     public boolean isGreater(Hours h) {
-        boolean result = this.hours > h.hours || (this.hours == h.hours && (this.minutes >= h.minutes));
+        boolean result = this.mHours > h.mHours || (this.mHours == h.mHours && (this.mMinutes >= h.mMinutes));
         return result;
     }
 
     public boolean isLower(Hours h) {
-        boolean results = this.hours < h.hours || (this.hours == h.hours && (this.minutes <= h.minutes));
+        boolean results = this.mHours < h.mHours || (this.mHours == h.mHours && (this.mMinutes <= h.mMinutes));
         return results;
 
     }

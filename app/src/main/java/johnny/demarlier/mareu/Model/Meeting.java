@@ -5,12 +5,7 @@ import java.util.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import johnny.demarlier.mareu.Controller.AddMeetingActivity;
-import johnny.demarlier.mareu.Controller.ListMeetingActivity;
 
 /**
  * Model object representing a meeting
@@ -18,17 +13,18 @@ import johnny.demarlier.mareu.Controller.ListMeetingActivity;
 
 public class Meeting implements Parcelable {
 
-    private Hours startMeeting;
-    private Hours stopMeeting;
-    private String date;
-    private Room place;
-    private String topic;
-    private String mail;
+    private Hours mStartMeeting;
+    private Hours mStopMeeting;
+    private String mDate;
+    private Room mPlace;
+    private String mTopic;
+    private String mMail;
+    private Integer mMeetingColor;
 
 
     private boolean isConflict(Meeting other) {
-        if (this.place.equals(other.place) && this.date.equals(other.date)) {
-            if (this.startMeeting.isConflictWithMeetingHours(other) || this.stopMeeting.isConflictWithMeetingHours(other)) {
+        if (this.mPlace.equals(other.mPlace) && this.mDate.equals(other.mDate)) {
+            if (this.mStartMeeting.isConflictWithMeetingHours(other) || this.mStopMeeting.isConflictWithMeetingHours(other)) {
                 return true;
             }
         }
@@ -55,23 +51,26 @@ public class Meeting implements Parcelable {
      * @param mail
      */
     public Meeting(Hours startMeeting, Hours stopMeeting, String date, Room place, String topic, String mail) {
-        this.startMeeting = startMeeting;
-        this.stopMeeting = stopMeeting;
-        this.date = date;
-        this.place = place;
-        this.topic = topic;
-        this.mail = mail;
+        this.mStartMeeting = startMeeting;
+        this.mStopMeeting = stopMeeting;
+        this.mDate = date;
+        this.mPlace = place;
+        this.mTopic = topic;
+        this.mMail = mail;
+        this.mMeetingColor = -14811907;
+
 
     }
 
 
     protected Meeting(Parcel in) {
-        startMeeting = in.readParcelable(Hours.class.getClassLoader());
-        stopMeeting = in.readParcelable(Hours.class.getClassLoader());
-        date = in.readString();
-        place = in.readParcelable(Room.class.getClassLoader());
-        topic = in.readString();
-        mail = in.readString();
+        mStartMeeting = in.readParcelable(Hours.class.getClassLoader());
+        mStopMeeting = in.readParcelable(Hours.class.getClassLoader());
+        mDate = in.readString();
+        mPlace = in.readParcelable(Room.class.getClassLoader());
+        mTopic = in.readString();
+        mMail = in.readString();
+        mMeetingColor = in.readInt();
     }
 
     public static final Creator<Meeting> CREATOR = new Creator<Meeting>() {
@@ -87,52 +86,60 @@ public class Meeting implements Parcelable {
     };
 
     //----GETTERS & SETTERS---
+
+    public Integer getMeetingColor(){
+    return mMeetingColor;}
+
+    public void setMeetingColor(Integer meetingColor) {
+        this.mMeetingColor = meetingColor;
+    }
+
     public Hours getStartMeeting() {
-        return startMeeting;
+        return mStartMeeting;
     }
 
     public void setStartMeeting(Hours startMeeting) {
-        this.startMeeting = startMeeting;
+        this.mStartMeeting = startMeeting;
     }
 
     public Hours getStopMeeting() {
-        return stopMeeting;
+        return mStopMeeting;
     }
 
     public void setStopMeeting(Hours stopMeeting) {
-        this.stopMeeting = stopMeeting;
+        this.mStopMeeting = stopMeeting;
     }
 
     public String getDate() {
-        return date;
+        return mDate;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.mDate = date;
     }
 
     public Room getPlace() {
-        return place;
+        return mPlace;
     }
 
     public void setPlace(Room place) {
-        this.place = place;
+        this.mPlace = place;
     }
 
     public String getTopic() {
-        return topic;
+        return mTopic;
     }
 
     public void setTopic(String topic) {
-        this.topic = topic;
+        this.mTopic = topic;
     }
 
     public String getMail() {
-        return mail;
+        return mMail;
     }
 
     public void setMail(String mail) {
-        this.mail = mail;
+        this.mMail = mail;
     }
 
     @Override
@@ -145,27 +152,29 @@ public class Meeting implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Meeting meeting = (Meeting) o;
-        return Objects.equals(startMeeting, meeting.startMeeting) &&
-                Objects.equals(stopMeeting, meeting.stopMeeting) &&
-                Objects.equals(date, meeting.date) &&
-                Objects.equals(place, meeting.place) &&
-                Objects.equals(topic, meeting.topic) &&
-                Objects.equals(mail, meeting.mail);
+        return Objects.equals(mStartMeeting, meeting.mStartMeeting) &&
+                Objects.equals(mStopMeeting, meeting.mStopMeeting) &&
+                Objects.equals(mDate, meeting.mDate) &&
+                Objects.equals(mPlace, meeting.mPlace) &&
+                Objects.equals(mTopic, meeting.mTopic) &&
+                Objects.equals(mMeetingColor, meeting.mMeetingColor)&&
+                Objects.equals(mMail, meeting.mMail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(startMeeting, stopMeeting, date, place, topic, mail);
+        return Objects.hash(mStartMeeting, mStopMeeting, mDate, mPlace, mTopic, mMail);
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeParcelable(startMeeting, i);
-        parcel.writeParcelable(stopMeeting, i);
-        parcel.writeString(date);
-        parcel.writeParcelable(place, i);
-        parcel.writeString(topic);
-        parcel.writeString(mail);
+        parcel.writeParcelable(mStartMeeting, i);
+        parcel.writeParcelable(mStopMeeting, i);
+        parcel.writeString(mDate);
+        parcel.writeParcelable(mPlace, i);
+        parcel.writeString(mTopic);
+        parcel.writeString(mMail);
+        parcel.writeInt(mMeetingColor);
     }
 
 }
