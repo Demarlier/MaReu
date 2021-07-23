@@ -48,12 +48,7 @@ public class ListMeetingActivity extends AppCompatActivity implements MeetingLis
         mMeetingApiService = DI.getMeetingApiService();
         initList();
 
-        mFbAddMeeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ListMeetingActivity.this, AddMeetingActivity.class));
-            }
-        });
+        mFbAddMeeting.setOnClickListener(v -> startActivity(new Intent(ListMeetingActivity.this, AddMeetingActivity.class)));
 
 
     }

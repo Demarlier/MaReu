@@ -40,16 +40,8 @@ public class Meeting implements Parcelable {
         return false;
     }
 
-    /**
-     * Constructor
-     *
-     * @param startMeeting
-     * @param stopMeeting
-     * @param date
-     * @param place
-     * @param topic
-     * @param mail
-     */
+    //----CONSTRUCTOR ----
+
     public Meeting(Hours startMeeting, Hours stopMeeting, String date, Room place, String topic, String mail) {
         this.mStartMeeting = startMeeting;
         this.mStopMeeting = stopMeeting;
@@ -98,48 +90,24 @@ public class Meeting implements Parcelable {
         return mStartMeeting;
     }
 
-    public void setStartMeeting(Hours startMeeting) {
-        this.mStartMeeting = startMeeting;
-    }
-
     public Hours getStopMeeting() {
         return mStopMeeting;
-    }
-
-    public void setStopMeeting(Hours stopMeeting) {
-        this.mStopMeeting = stopMeeting;
     }
 
     public String getDate() {
         return mDate;
     }
 
-    public void setDate(String date) {
-        this.mDate = date;
-    }
-
     public Room getPlace() {
         return mPlace;
-    }
-
-    public void setPlace(Room place) {
-        this.mPlace = place;
     }
 
     public String getTopic() {
         return mTopic;
     }
 
-    public void setTopic(String topic) {
-        this.mTopic = topic;
-    }
-
     public String getMail() {
         return mMail;
-    }
-
-    public void setMail(String mail) {
-        this.mMail = mail;
     }
 
     @Override

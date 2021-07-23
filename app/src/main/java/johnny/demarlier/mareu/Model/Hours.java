@@ -49,13 +49,13 @@ public class Hours implements Parcelable {
     }
 
     public boolean isGreater(Hours h) {
-        boolean result = this.mHours > h.mHours || (this.mHours == h.mHours && (this.mMinutes >= h.mMinutes));
-        return result;
+        boolean resultGreater = this.mHours > h.mHours || (this.mHours == h.mHours && (this.mMinutes >= h.mMinutes));
+        return resultGreater;
     }
 
     public boolean isLower(Hours h) {
-        boolean results = this.mHours < h.mHours || (this.mHours == h.mHours && (this.mMinutes <= h.mMinutes));
-        return results;
+        boolean resultLower = this.mHours < h.mHours || (this.mHours == h.mHours && (this.mMinutes <= h.mMinutes));
+        return resultLower;
 
     }
 

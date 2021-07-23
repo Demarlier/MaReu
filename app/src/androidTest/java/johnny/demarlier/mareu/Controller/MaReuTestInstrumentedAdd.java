@@ -41,7 +41,7 @@ public class MaReuTestInstrumentedAdd {
     public ActivityTestRule<ListMeetingActivity> mActivityTestRule = new ActivityTestRule<>(ListMeetingActivity.class);
 
     @Test
-    public void maRéuTestInstrumentedAdd() {
+    public void maReuTestInstrumentedAdd() {
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.addMeeting_btn),
                         childAtPosition(
