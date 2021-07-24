@@ -65,7 +65,7 @@ public class MaReuUnitTest {
         assertEquals(api.getMeetings().size(),0);
     }
 
-    // Add a meeting withe same hours and place, but whith another shouldn't interfere and change the size of the list ---
+    // Add a meeting withe same hours and place, but with another shouldn't interfere and change the size of the list ---
     @Test
     public void addMeetingWithSamePlaceAndRoomsButDifferentDate_ShouldWorks(){
         assertEquals(api.getMeetings().size(),1);
