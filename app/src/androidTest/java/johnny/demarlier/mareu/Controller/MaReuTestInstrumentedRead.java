@@ -1,11 +1,14 @@
 package johnny.demarlier.mareu.Controller;
 
 
+import android.view.View;
+
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,17 +24,18 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ListMeetingActivityTest {
+public class MaReuTestInstrumentedRead {
 
     @Rule
     public ActivityTestRule<ListMeetingActivity> mActivityTestRule = new ActivityTestRule<>(ListMeetingActivity.class);
 
     @Test
-    public void listMeetingActivityTest() {
-        ViewInteraction viewPager = onView(
-                allOf(withId(R.id.viewPager_listMeeting),
-                        withParent(withParent(withId(android.R.id.content))),
+    public void maReuTestInstrumentedRead() {
+        ViewInteraction viewGroup = onView(
+                allOf(withId(R.id.fragmentMeeting),
+                        withParent(allOf(withId(R.id.listMeeting_RecyclerView),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        viewPager.check(matches(isDisplayed()));
+        viewGroup.check(matches(isDisplayed()));
     }
 }
